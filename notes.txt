@@ -1,0 +1,15 @@
+- ability to add a recipe 
+- ability to edited a recipe 
+- ability to delete a recipe 
+- ability to add an image of the recipe 
+- ability to search for a recipe
+
+- recipe information: 
+    prep time 
+    cook time 
+    servings 
+    yield 
+    recipe title 
+    description 
+    ingredients 
+    directions
