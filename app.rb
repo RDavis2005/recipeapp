@@ -1,38 +1,31 @@
 def add
+    info = {}
+    
     print "title: "
-    title = gets.chomp
+    info['title'] = gets.chomp
     
     print "description: "
-    description = gets.chomp
+    info['description'] = gets.chomp
     
     print "ingredients: "
-    ingredients = gets.chomp
+    info['ingredients'] = gets.chomp
     
     print "directions: "
-    directions = gets.chomp
+    info['directions'] = gets.chomp
     
     print "prep_time: "
-    prep_time = gets.chomp
+    info['prep_time'] = gets.chomp
     
     print "cook_time: "
-    cook_time = gets.chomp
+    info['cook_time'] = gets.chomp
     
     print "servings: "
-    servings = gets.chomp
+    info['servings'] = gets.chomp
     
     print "amount: "
-    amount = gets.chomp
+    info['amount'] = gets.chomp
     
-    recipe = Recipe.new
-    recipe.title = title
-    recipe.description = description
-    recipe.ingredients = ingredients
-    recipe.directions = directions
-    recipe.prep_time = prep_time
-    recipe.cook_time = cook_time
-    recipe.servings = servings
-    recipe.amount = amount
-    
+    recipe = Recipe.new(info)
     recipe.save
 end
 
@@ -40,19 +33,21 @@ def search
     print "title: "
     title = gets.chomp
     
-    recipe = Recipe.find_by({:title => title})
+    recipes = Recipe.where("title like ?", "%#{title}%")
     
-    if recipe == nil
+    if recipes.length == 0
         puts "Recipe not found"
     else
-        puts "Title: #{recipe.title}"
-        puts "Description: #{recipe.description}"
-        puts "Ingredients: #{recipe.ingredients}"
-        puts "Directions: #{recipe.directions}"
-        puts "Prep Time: #{recipe.prep_time}"
-        puts "Cook Time: #{recipe.cook_time}"
-        puts "Servings: #{recipe.servings}"
-        puts "Yield: #{recipe.amount}"
+        recipes.each do |recipe|
+            puts "Title: #{recipe.title}"
+            puts "Description: #{recipe.description}"
+            puts "Ingredients: #{recipe.ingredients}"
+            puts "Directions: #{recipe.directions}"
+            puts "Prep Time: #{recipe.prep_time}"
+            puts "Cook Time: #{recipe.cook_time}"
+            puts "Servings: #{recipe.servings}"
+            puts "Yield: #{recipe.amount}"
+        end
     end
 end
 
